@@ -1,0 +1,12 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 40px;
+}
+
+.register__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

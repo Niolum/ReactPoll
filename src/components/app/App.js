@@ -3,9 +3,12 @@ import { Route, Routes } from 'react-router';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute.jsx';
 import Header from "../appHeader/Header";
 import Home from "../appHome/Home";
+import Profile from '../appProfile/Profile.js';
 import Login from "../appLogin/Login";
+import Register from '../appRegister/Register';
 import getCookie from "../utils.js";
 import { AuthContextProvider } from '../../providers/authContext.jsx';
+import { RegisterContextProvider } from '../../providers/registerContext.jsx';
 import './styles'
 
 
@@ -15,22 +18,32 @@ function App() {
   
   return (
     <AuthContextProvider>
-      <>
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-      <Routes>
-        <Route element={<ProtectedRoute/>}>
+      <RegisterContextProvider>
+        <>
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <Routes>
+          <Route element={<ProtectedRoute/>}>
+            <Route
+              path='/'
+              element={<Home/>}
+            />
+            <Route
+              path='/profile'
+              element={<Profile/>}
+            />
+          </Route>
           <Route
-            path='/'
-            element={<Home/>}
+            path='/login'
+            element={<Login/>}
           />
-        </Route>
-        <Route
-          path='/login'
-          element={<Login/>}
-        />
+          <Route
+            path='/register'
+            element={<Register/>}
+          />
 
-      </Routes>
-      </>
+        </Routes>
+        </>
+      </RegisterContextProvider>
     </AuthContextProvider>
   )
 }

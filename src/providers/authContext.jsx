@@ -31,10 +31,23 @@ export const AuthContextProvider = ({
             })
         return result
     }
-    const logout = () => {
 
-    }
     const user = authService.getCurrentUser()
+
+    const logout = () => {
+        const refreshToken = user.tokens.refresh
+        const accessToken = user.tokens.access
+
+        authService = new AuthService(
+            accessToken,
+            refreshToken
+        )
+
+        const result = authService.logout()
+        return result
+    }
+
+
 
     return (
         <AuthContext.Provider
