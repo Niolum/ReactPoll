@@ -34,7 +34,9 @@ class AuthService {
     }
 
     logout = () => {
+        const data = {refresh: this.refreshToken}
         localStorage.removeItem("user");
+        return axios.post(`${API_URL}/account/logout/`, data, { headers: this.headers })
     }
 
     getCurrentUser = () => {
